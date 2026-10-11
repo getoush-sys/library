@@ -926,6 +926,11 @@ function ThemeManager:CreateThemeManager(Themesbox: any)
     local OutlineColor = CreateColorOption("Outline color", "OutlineColor")
     local FontColor = CreateColorOption("Font color", "FontColor")
 
+    local GlowColor = Themesbox:AddLabel("Glow color"):AddColorPicker("GlowColor", {
+        Default = ThemeManager.Library.Scheme.AccentColor,
+    })
+    GlowColor = ThemeManager.Library.Options["GlowColor"]
+
     --// Accessibility: live contrast readout for the colors above
     ThemeManager.ContrastLabel = Themesbox:AddLabel({
         Text = "Contrast check: n/a",
@@ -1254,6 +1259,14 @@ function ThemeManager:CreateThemeManager(Themesbox: any)
     AccentColor:OnChanged(UpdateTheme)
     OutlineColor:OnChanged(UpdateTheme)
     FontColor:OnChanged(UpdateTheme)
+    if GlowColor and GlowColor.OnChanged then
+        GlowColor:OnChanged(function(Color)
+            local Window = ThemeManager.Library.Window
+            if Window and Window.SetGlow then
+                Window:SetGlow(true, { Color = Color })
+            end
+        end)
+    end
     FontFace:OnChanged(function(Value) ThemeManager.Library:SetFont(Enum.Font[Value]) end)
     BackgroundImage:OnChanged(function(Value) ThemeManager.Library:SetBackgroundImage(Value) end)
 

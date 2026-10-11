@@ -477,13 +477,13 @@ local Templates = {
         --// Glow \\--
         --// Off by default and never forced. The glow is a visible render effect,
         --// so the user opts in themselves via Window:SetGlow(true) (or this flag).
-        Glow = false,
+        Glow = true,
 
         --// Drop shadow \\--
         --// Neutral, feathered shadow behind the window and the minimized pill so
-        --// the UI reads as a floating surface over the game. On by default; opt
-        --// out with Shadow = false or Window:SetShadow(false).
-        Shadow = true,
+        --// the UI reads as a floating surface over the game. Opt in with
+        --// Shadow = true or Window:SetShadow(true).
+        Shadow = false,
         ShadowTransparency = 0.5,
         ShadowRadius = 24,
         ShadowOffset = 8,
@@ -17071,8 +17071,8 @@ function Library:CreateWindow(WindowInfo)
     local GlowParts = {}
     local GlowConfig = {
         Enabled = false,
-        Transparency = 0.35,
-        Radius = 16,
+        Transparency = 0.6,
+        Radius = 20,
         UseAccent = true,
         Color = nil,
     }
@@ -22948,13 +22948,13 @@ function Library:CreateWindow(WindowInfo)
         Window:SetMinimized(true)
     end
 
-    --// Glow stays opt-in: only build it when explicitly requested via config.
-    if WindowInfo.Glow then
+    --// Glow is on by default: build it unless the config opted out.
+    if WindowInfo.Glow ~= false then
         Window:SetGlow(true)
     end
 
-    --// Drop shadow is on by default: build it unless the config opted out.
-    if WindowInfo.Shadow ~= false then
+    --// Drop shadow is off by default: build it only if explicitly requested.
+    if WindowInfo.Shadow == true then
         Window:SetShadow(true)
     end
 
