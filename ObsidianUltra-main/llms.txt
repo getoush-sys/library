@@ -565,7 +565,7 @@ themselves.
 ```lua
 local Watermark = Library:AddWatermark({
     { Player = LocalPlayer },                 -- avatar + display name (NameType = "Username" for the account name)
-    { Icon = "flame", Text = "mspaint", Accent = true }, -- Accent tints this segment
+    { Icon = "flame", Text = "Aero", Accent = true }, -- Accent tints this segment
     { Icon = "cpu",  Text = function() return identifyexecutor and identifyexecutor() or "Unknown" end },
     { Icon = "wifi", Text = function() return string.format("%d ms", GetPing()) end },
     { Icon = "clock", Text = function() return os.date("%H:%M") end },
@@ -778,7 +778,7 @@ is `{ Executor, Window, Destroyed, Destroy() }`; `:Destroy()` unloads the librar
 
 ```lua
 local Gate = Library:CreateUnsupportedScreen({
-    Title = "mspaint",
+    Title = "Aero",
     Icon = "shield-alert",
     Supported = { "Potassium", "Volt", "Real", "Opiumware", "Delta" },
 })
