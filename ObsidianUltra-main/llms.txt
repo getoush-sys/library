@@ -7,7 +7,7 @@
 Load it the same way as upstream, but from this repo:
 
 ```lua
-local repo = "https://raw.githubusercontent.com/joustingmatch/ObsidianUltra/main/"
+local repo = "https://raw.githubusercontent.com/getoush-sys/library/main/ObsidianUltra-main/"
 local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
 ```
 
